@@ -1,0 +1,8 @@
+FROM python:3.11.10-slim-bookworm
+WORKDIR /srv
+COPY apps/server/pyproject.toml apps/server/uv.lock ./
+RUN pip install --no-cache-dir uv==0.8.22 && uv sync --frozen --no-dev
+COPY apps/server/app ./app
+USER 65532:65532
+EXPOSE 8080
+CMD [".venv/bin/uvicorn","app.main:app","--host","0.0.0.0","--port","8080","--proxy-headers","--forwarded-allow-ips","127.0.0.1"]

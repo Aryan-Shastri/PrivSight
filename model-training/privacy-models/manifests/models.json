@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "models": [
+    {
+      "id": "ppocrv3-en-text-detection-2023may",
+      "purpose": "OCR candidate-region detection only; no text recognition",
+      "artifact_path": ".cache/models/text_detection_en_ppocrv3_2023may.onnx",
+      "bytes": 2423490,
+      "sha256": "03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587",
+      "source_repository": "https://github.com/opencv/opencv_zoo",
+      "source_commit": "47534e27c9851bb1128ccc0102f1145e27f23f98",
+      "source_path": "models/text_detection_ppocr/text_detection_en_ppocrv3_2023may.onnx",
+      "source_url": "https://media.githubusercontent.com/media/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/text_detection_ppocr/text_detection_en_ppocrv3_2023may.onnx",
+      "upstream_training_artifact": "https://paddleocr.bj.bcebos.com/PP-OCRv3/english/en_PP-OCRv3_det_infer.tar",
+      "license": {
+        "spdx": "Apache-2.0",
+        "copyright": "Copyright (c) 2016 PaddlePaddle Authors",
+        "evidence": "https://raw.githubusercontent.com/opencv/opencv_zoo/47534e27c9851bb1128ccc0102f1145e27f23f98/models/text_detection_ppocr/LICENSE"
+      },
+      "contract": {
+        "graph": {
+          "ir_version": 8,
+          "opsets": [15],
+          "inputs": [{"name": "x", "dtype": "float32", "shape": [1, 3, "?", "?"]}],
+          "outputs": [{"name": "4", "dtype": "float32", "shape": ["?", "?"]}]
+        },
+        "fixed_invocation": {
+          "input": {"name": "x", "dtype": "float32", "shape": [1, 3, 736, 736], "layout": "NCHW", "color": "RGB", "normalization": "(pixel/255 - [0.485,0.456,0.406]) / [0.229,0.224,0.225]"},
+          "output": {"name": "4", "dtype": "float32", "shape": [736, 736], "semantics": "text probability heatmap"}
+        }
+      }
+    },
+    {
+      "id": "ultraface-rfb-320",
+      "purpose": "face candidate-region detection",
+      "artifact_path": ".cache/models/version-RFB-320.onnx",
+      "bytes": 1270727,
+      "sha256": "34cd7e60aeff28744c657de7a3dc64e872d506741de66987f3426f2b79f88017",
+      "source_repository": "https://github.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB",
+      "source_commit": "dffdddda9794a50607cba8f318507a28c1c27cab",
+      "source_path": "models/onnx/version-RFB-320.onnx",
+      "source_url": "https://raw.githubusercontent.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB/dffdddda9794a50607cba8f318507a28c1c27cab/models/onnx/version-RFB-320.onnx",
+      "license": {
+        "spdx": "MIT",
+        "copyright": "Copyright (c) 2019 linzai",
+        "evidence": "https://raw.githubusercontent.com/Linzaer/Ultra-Light-Fast-Generic-Face-Detector-1MB/dffdddda9794a50607cba8f318507a28c1c27cab/LICENSE"
+      },
+      "contract": {
+        "graph": {
+          "ir_version": 4,
+          "opsets": [9],
+          "inputs": [{"name": "input", "dtype": "float32", "shape": [1, 3, 240, 320]}],
+          "outputs": [
+            {"name": "scores", "dtype": "float32", "shape": [1, 4420, 2]},
+            {"name": "boxes", "dtype": "float32", "shape": [1, 4420, 4]}
+          ]
+        },
+        "fixed_invocation": {
+          "input": {"name": "input", "dtype": "float32", "shape": [1, 3, 240, 320], "layout": "NCHW", "color": "RGB", "normalization": "(pixel - 127) / 128"},
+          "outputs": [
+            {"name": "scores", "dtype": "float32", "shape": [1, 4420, 2], "semantics": "background/face probabilities"},
+            {"name": "boxes", "dtype": "float32", "shape": [1, 4420, 4], "semantics": "normalized xyxy boxes"}
+          ]
+        }
+      }
+    }
+  ]
+}

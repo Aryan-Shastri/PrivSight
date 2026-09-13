@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0",
+  "algorithm": "SHA-256",
+  "files": [
+    {
+      "path": "apps/extension/.output/chrome-mv3/assets/ort-wasm-simd-threaded.jsep-CLPRrI3A.wasm",
+      "sha256": "b45970d0632383a057c27ca5b660b216f8e00c17cf8db9f6207b5e4abc839368",
+      "bytes": 21872216
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/assets/sidepanel-umTlH5yg.css",
+      "sha256": "123201fce0e5f609faa6626fc19f2d40cdfcfe3df8001a51d08d715e3f5c4e5b",
+      "bytes": 3784
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/assets/vision.worker-D6Vei8xQ.js",
+      "sha256": "b4eca445f39bd9694af34ecc27028b737821ddc6a772da5f752b9438c9ee327c",
+      "bytes": 795665
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/background.js",
+      "sha256": "5b1f06fdd181bb08eaad9799a5fb7d95ce86ab1fc74e4ecb754a22fb1031b4b0",
+      "bytes": 106829
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/chunks/browser-DKnVyUgM.js",
+      "sha256": "267d3c21422e04e403b6e46b4e77124697c993b78887decc29be9c961fa901ca",
+      "bytes": 760
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/chunks/offscreen-Beh8PD2J.js",
+      "sha256": "d5559367f3a45dbc298881668c897e69e97e1ea37ca8761a257c48eee9cb0a1f",
+      "bytes": 2373
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/chunks/sidepanel-BllqeCtf.js",
+      "sha256": "7f2135d3b6cf3d9bda195c2f7f86e0d9cccbbd47b87123a2bdce0a1065dbf558",
+      "bytes": 222388
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/content-runtime.js",
+      "sha256": "45ff77c27d31c6f405ceb4b74befaa16eeef82a0501b801b2bb2cdbc4c81b6cd",
+      "bytes": 2596
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/manifest.json",
+      "sha256": "091143692c7b2ae36558654da44a669e42e7d188caba54082d9fe949f12b9356",
+      "bytes": 507
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/models/README.md",
+      "sha256": "30d7988d17cde2e83df76fece1c1d68af765ec78c03b37f8658933c1dcb887a6",
+      "bytes": 1892
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/models/privsight-ui6.metadata.json",
+      "sha256": "ba474d4751a9847158869fd795ec38a40695730455c9cc04a5681ad866b7e6fd",
+      "bytes": 727
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/models/privsight-ui6.onnx",
+      "sha256": "0cbc2a4f006db44860572932b8f66edfb3c30c104a46fbfc1193ba4d07e42ee9",
+      "bytes": 9017538
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/models/text_detection_en_ppocrv3_2023may.onnx",
+      "sha256": "03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587",
+      "bytes": 2423490
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/models/version-RFB-320.onnx",
+      "sha256": "34cd7e60aeff28744c657de7a3dc64e872d506741de66987f3426f2b79f88017",
+      "bytes": 1270727
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/offscreen.html",
+      "sha256": "a96286d3f5a92afbedf6e7a71c94595648b3329402dc0eae3547ec6533f0844d",
+      "bytes": 235
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/sidepanel.html",
+      "sha256": "50f7acab273350ba64aa905c15488f3fca985e463c1206c413bb5ecabfb383ea",
+      "bytes": 432
+    },
+    {
+      "path": "apps/extension/public/models/README.md",
+      "sha256": "30d7988d17cde2e83df76fece1c1d68af765ec78c03b37f8658933c1dcb887a6",
+      "bytes": 1892
+    },
+    {
+      "path": "apps/extension/public/models/privsight-ui6.metadata.json",
+      "sha256": "ba474d4751a9847158869fd795ec38a40695730455c9cc04a5681ad866b7e6fd",
+      "bytes": 727
+    },
+    {
+      "path": "apps/extension/public/models/privsight-ui6.onnx",
+      "sha256": "0cbc2a4f006db44860572932b8f66edfb3c30c104a46fbfc1193ba4d07e42ee9",
+      "bytes": 9017538
+    },
+    {
+      "path": "apps/extension/public/models/text_detection_en_ppocrv3_2023may.onnx",
+      "sha256": "03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587",
+      "bytes": 2423490
+    },
+    {
+      "path": "apps/extension/public/models/version-RFB-320.onnx",
+      "sha256": "34cd7e60aeff28744c657de7a3dc64e872d506741de66987f3426f2b79f88017",
+      "bytes": 1270727
+    },
+    {
+      "path": "artifacts/browser-smoke-report.json",
+      "sha256": "e8e618216fe98b628cc21cde58af706f356b1a88d888c332775da0b14007c628",
+      "bytes": 5843
+    },
+    {
+      "path": "artifacts/demo-gate-report.json",
+      "sha256": "725aa412e07e454d99b594246cfe20d63485f364bcf75d17a3c8d8d8d301be0e",
+      "bytes": 4762
+    },
+    {
+      "path": "artifacts/evaluation-report.json",
+      "sha256": "f88246f0e76d63264b32ced1c610d179821b9413996cc4fcfb2c68d03e5f8db6",
+      "bytes": 3946
+    },
+    {
+      "path": "artifacts/sbom-models.spdx.json",
+      "sha256": "f614fff97337d39d78f3bba154570ccf1d3551ff850b4f55769219cc0debf3ba",
+      "bytes": 1564
+    },
+    {
+      "path": "artifacts/sbom-software.spdx.json",
+      "sha256": "e36f2a04f50f03b15428166b9842a66a6a6330b892b0d6aa723f85f12a402aab",
+      "bytes": 230762
+    },
+    {
+      "path": "docs/THIRD_PARTY_LICENSES.md",
+      "sha256": "c976fff41a5004a12d5d3d36d8028338276fcb8ab623225c27355286af4c9c7f",
+      "bytes": 2009
+    },
+    {
+      "path": "docs/architecture-final.md",
+      "sha256": "b211af202fb92794fa2637300454bdd3c96d72d7a08135c461d182b38dcaa9eb",
+      "bytes": 1936
+    },
+    {
+      "path": "docs/security-final.md",
+      "sha256": "4ef52b6a74326a14a47ed18fa9fcca00b45542ea07fe7a3c95d58c09d4c060cb",
+      "bytes": 2009
+    }
+  ]
+}

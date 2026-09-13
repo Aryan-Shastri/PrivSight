@@ -1,0 +1,1 @@
+{"minimum_samples":100,"required_subgroups":["direction:ltr","direction:rtl","contrast:high","zoom:200","accessibility:keyboard-only"],"privacy_classes":["face","sensitive","text"],"privacy_min_recall":0.98}

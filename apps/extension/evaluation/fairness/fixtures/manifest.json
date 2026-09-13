@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0.0",
+  "corpus_name": "self-generated-format-fixtures-not-a-benchmark",
+  "items": [
+    {
+      "id": "self-ltr-001", "path": "ltr.txt", "media_type": "text/plain", "split": "validation", "site_id": "fixture-site-ltr", "session_id": "fixture-session-ltr",
+      "provenance": {"source_url": "self-generated:fixtures/ltr.txt", "collected_at": "2026-01-01T00:00:00Z", "collector": "PrivSight maintainers", "method": "self-generated", "content_sha256": "7e7009ab86ba303de392fc19f7a30cddb2a0faa509e391647715e90b6e40099d"},
+      "license": {"spdx_id": "LicenseRef-SelfGenerated", "license_url": "LICENSE", "attribution": "PrivSight project contributors"},
+      "context": {"languages": ["en"], "direction": "ltr", "contrast": "normal", "zoom_percent": 100, "accessibility": ["screen-reader-labels"], "subgroups": ["synthetic", "latin-script"]},
+      "annotations": [{"id": "r1", "class": "face", "bbox": [0, 0, 10, 10], "occluded": false}, {"id": "r2", "class": "ui", "bbox": [20, 0, 10, 10], "ui_role": "button"}]
+    },
+    {
+      "id": "self-rtl-001", "path": "rtl.txt", "media_type": "text/plain", "split": "test", "site_id": "fixture-site-rtl", "session_id": "fixture-session-rtl",
+      "provenance": {"source_url": "self-generated:fixtures/rtl.txt", "collected_at": "2026-01-01T00:00:00Z", "collector": "PrivSight maintainers", "method": "self-generated", "content_sha256": "c026084b859e672e3c554628bea01c5b49ecc65b23352ff03c15747b9bc2a577"},
+      "license": {"spdx_id": "CC0-1.0", "license_url": "https://creativecommons.org/publicdomain/zero/1.0/", "attribution": "PrivSight project contributors; dedicated to CC0"},
+      "context": {"languages": ["ar"], "direction": "rtl", "contrast": "high", "zoom_percent": 200, "accessibility": ["keyboard-only", "screen-reader-labels"], "subgroups": ["synthetic", "arabic-script"]},
+      "annotations": [{"id": "r3", "class": "text", "bbox": [0, 0, 30, 10], "text_language": "ar", "text_direction": "rtl"}, {"id": "r4", "class": "sensitive", "bbox": [0, 20, 10, 10], "sensitive_type": "email"}]
+    }
+  ]
+}

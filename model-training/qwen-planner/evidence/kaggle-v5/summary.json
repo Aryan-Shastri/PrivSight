@@ -1,0 +1,10 @@
+{
+  "adversarial_checks": 2,
+  "adversarial_rejections": 2,
+  "cases": 20,
+  "decoding": "case-specific token-prefix trie over strict-schema actions; no post-hoc repair",
+  "invalid_actions": 0,
+  "model_ref": "qwen-lm/qwen-3-vl/transformers/2b-instruct/1",
+  "schema_valid_rate": 1.0,
+  "valid_actions": 20
+}

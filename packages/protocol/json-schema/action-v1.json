@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentAction",
+  "oneOf": [
+    {"type":"object","additionalProperties":false,"required":["type","elementId"],"properties":{"type":{"const":"CLICK"},"elementId":{"type":"string","pattern":"^[EV]\\d{3,4}$"}}},
+    {"type":"object","additionalProperties":false,"required":["type","elementId","text"],"properties":{"type":{"const":"TYPE_TEXT"},"elementId":{"type":"string","pattern":"^[EV]\\d{3,4}$"},"text":{"type":"string","minLength":1,"maxLength":2000}}},
+    {"type":"object","additionalProperties":false,"required":["type","elementId","token"],"properties":{"type":{"const":"TYPE_TOKEN"},"elementId":{"type":"string","pattern":"^[EV]\\d{3,4}$"},"token":{"type":"string","pattern":"^\\[(PASSWORD|OTP|PIN|CVV|EMAIL|PHONE|PERSON|ADDRESS|CARD|ACCOUNT|GOV_ID)_\\d+\\]$"}}},
+    {"type":"object","additionalProperties":false,"required":["type","elementId","option"],"properties":{"type":{"const":"SELECT"},"elementId":{"type":"string"},"option":{"type":"string","minLength":1,"maxLength":512}}},
+    {"type":"object","additionalProperties":false,"required":["type","elementId"],"properties":{"type":{"enum":["CHECK","UNCHECK"]},"elementId":{"type":"string"}}},
+    {"type":"object","additionalProperties":false,"required":["type","direction","amountPx"],"properties":{"type":{"const":"SCROLL"},"direction":{"enum":["UP","DOWN"]},"amountPx":{"type":"integer","minimum":1,"maximum":800}}},
+    {"type":"object","additionalProperties":false,"required":["type","milliseconds"],"properties":{"type":{"const":"WAIT"},"milliseconds":{"type":"integer","minimum":1,"maximum":5000}}},
+    {"type":"object","additionalProperties":false,"required":["type","message"],"properties":{"type":{"const":"ASK_USER"},"message":{"type":"string","minLength":1,"maxLength":512}}},
+    {"type":"object","additionalProperties":false,"required":["type","summary"],"properties":{"type":{"const":"DONE"},"summary":{"type":"string","minLength":1,"maxLength":512}}}
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "cases": 5,
+  "invalid_actions": 5,
+  "model_ref": "qwen-lm/qwen-3-vl/transformers/2b-instruct/1",
+  "valid_actions": 0
+}

@@ -1,0 +1,6 @@
+onnx==1.22.0
+onnxruntime==1.30.0
+numpy==2.4.6
+opencv-python-headless==5.0.0.93
+pillow==12.3.0
+pytest==9.1.1

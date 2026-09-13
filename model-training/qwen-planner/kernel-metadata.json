@@ -1,0 +1,16 @@
+{
+  "id": "aryanshastri/privsight-qwen3-vl-planner-exp-03-exp-07",
+  "title": "PrivSight Qwen3-VL Planner EXP-03 EXP-07",
+  "code_file": "run_batch.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": "true",
+  "enable_gpu": "true",
+  "enable_tpu": "false",
+  "enable_internet": "false",
+  "machine_shape": "",
+  "dataset_sources": [],
+  "competition_sources": [],
+  "kernel_sources": [],
+  "model_sources": ["qwen-lm/qwen-3-vl/transformers/2b-instruct/1"]
+}

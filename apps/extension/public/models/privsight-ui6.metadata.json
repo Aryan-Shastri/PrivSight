@@ -1,0 +1,29 @@
+{
+  "sha256": "0cbc2a4f006db44860572932b8f66edfb3c30c104a46fbfc1193ba4d07e42ee9",
+  "classes": [
+    "button",
+    "checkbox",
+    "text_input",
+    "dropdown",
+    "icon",
+    "text_region"
+  ],
+  "input": [
+    1,
+    3,
+    416,
+    416
+  ],
+  "opset": 18,
+  "trained": true,
+  "architecture": "YOLOX-Nano",
+  "upstream_license": "Apache-2.0",
+  "held_out_metrics": {
+    "split": "site-disjoint val",
+    "coco_ap_50_95": 0.726,
+    "coco_ap_50": 0.995
+  },
+  "training_kernel": "aryanshastri/privsight-six-class-local-ui-detector-export/14",
+  "checkpoint_sha256": "82a68bc2a9148910b2d13a484df4e20bf48c94c3b986d6842a27f342b66d192c",
+  "baseline_sha256": "cd28f55fbbc1829f99d9ac9b38a16d259a22889739c8728ea877610201feff7b"
+}

@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Synthetic detector regression fixtures only"
+paths = ['''^scripts/test_security_checks\.py$''']

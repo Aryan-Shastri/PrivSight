@@ -1,0 +1,12 @@
+import {useEffect,useState} from "react";
+type Status={state:string;message:string;planner?:string};
+export default function App(){const[goal,setGoal]=useState("");const[status,setStatus]=useState<Status>({state:"IDLE",message:"Ready. Nothing is injected until Start."});
+ useEffect(()=>{const listener=(m:any)=>{if(m?.type==="AGENT_STATUS")setStatus(m.payload)};browser.runtime.onMessage.addListener(listener);return()=>browser.runtime.onMessage.removeListener(listener)},[]);
+ const send=async(type:string)=>{const result=await browser.runtime.sendMessage({type,...(type==="START_AGENT"?{goal}: {})});if(!result?.ok)setStatus({state:"ERROR",message:result?.error||"Request failed"})};
+ const active=!['IDLE','COMPLETE','ERROR'].includes(status.state);
+ return <main><header><div className="mark" aria-hidden="true">P</div><div><h1>PrivSight</h1><p className="eyebrow">LOCAL PRIVACY LAYER</p></div><span className="status"><i/>Protected</span></header>
+ <section className="hero"><p className="kicker">DOM-first, private by construction</p><h2>Navigate the web.<br/><em>Keep your data yours.</em></h2><p>Controls are scanned and sensitive values tokenized locally. Only schema-checked metadata crosses the boundary.</p></section>
+ <section className="card"><label htmlFor="goal">What would you like to accomplish?</label><textarea id="goal" value={goal} onChange={e=>setGoal(e.target.value)} placeholder="e.g. Complete the synthetic registration" maxLength={2048}/><div className="compose"><span>{goal.length} / 2,048</span><button disabled={!goal.trim()||active} onClick={()=>send("START_AGENT")}>Start private session <b>→</b></button></div></section>
+ <section className="boundary"><div className="boundaryHead"><span>CAPABILITIES</span><strong>DOM SCAN</strong></div><p>Vision / OCR / face detection: unavailable. No canvas understanding is claimed. A deterministic sanitized placeholder image satisfies the planner transport contract.</p></section>
+ <section className="activity"><div><p className="eyebrow">SESSION ACTIVITY</p><span className={`pill ${status.state.toLowerCase()}`}>{status.state.replaceAll('_',' ')}</span></div><ul><li><i/>{status.message}</li>{status.planner&&<li><i/>Planner: {status.planner}</li>}</ul>{status.state==="AWAITING_APPROVAL"&&<button onClick={()=>send("APPROVE_ACTION")}>Approve final submit</button>}{active&&<button onClick={()=>send("STOP_AGENT")}>Cancel and purge</button>}</section>
+ <footer><span>Local-first architecture</span><span>Server: 127.0.0.1:8080</span></footer></main>}

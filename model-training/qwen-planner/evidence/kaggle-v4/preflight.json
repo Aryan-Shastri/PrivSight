@@ -1,0 +1,18 @@
+{
+  "cuda_available": true,
+  "execution_device": "cpu",
+  "gpu": "Tesla P100-PCIE-16GB",
+  "gpu_compute_capability": [
+    6,
+    0
+  ],
+  "internet_required": false,
+  "platform": "Linux-6.12.90+-x86_64-with-glibc2.35",
+  "python": "3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]",
+  "required_model_source": "qwen-lm/qwen-3-vl/transformers/2b-instruct/1",
+  "resolved_model_path": "/kaggle/input/models/qwen-lm/qwen-3-vl/transformers/2b-instruct/1",
+  "runtime_kind": "finite Kaggle batch job (not a persistent API)",
+  "status": "READY_CPU_FALLBACK_GPU_BINARY_INCOMPATIBLE",
+  "torch": "2.10.0+cu128",
+  "transformers": "5.0.0"
+}

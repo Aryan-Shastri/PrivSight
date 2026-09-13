@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0",
+  "scope": "FIVE_CONSECUTIVE_REAL_CHROMIUM_MV3_RUNS",
+  "generatedAt": "2026-09-13T09:11:42.211Z",
+  "models": {
+    "ui": {
+      "sha256": "0cbc2a4f006db44860572932b8f66edfb3c30c104a46fbfc1193ba4d07e42ee9"
+    },
+    "ocr": {
+      "sha256": "03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587"
+    },
+    "face": {
+      "sha256": "34cd7e60aeff28744c657de7a3dc64e872d506741de66987f3426f2b79f88017"
+    }
+  },
+  "summary": {
+    "passed": 5,
+    "total": 5,
+    "status": "PASS"
+  },
+  "latency": {
+    "metric": "local privacy request round trip",
+    "sampleCount": 5,
+    "p50Ms": 4718.300000011921,
+    "p95Ms": 5171.699999988079,
+    "worstMs": 5171.699999988079
+  },
+  "runs": [
+    {
+      "run": 1,
+      "status": "PASS",
+      "durationMs": 19455.539066999998,
+      "exitCode": 0,
+      "evidence": {
+        "status": "PASS",
+        "chromium": "140.0.7339.16",
+        "extensionId": "bdcbehkcmcgbmcoedlcoehakkioldjeg",
+        "manifest": {
+          "version": 3,
+          "csp": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        },
+        "serviceWorkerResponsive": true,
+        "offscreenCreated": true,
+        "captureTrigger": "EXPLICIT_REFRESH",
+        "providers": {
+          "ui": "wasm",
+          "ocr": "wasm",
+          "face": "wasm"
+        },
+        "webgpuAvailable": false,
+        "modelDependentEvidence": {
+          "localPrivacyMs": 5171.699999988079,
+          "uiDetections": 8,
+          "ocrRegions": 16,
+          "faceRegions": 0
+        },
+        "failClosed": {
+          "code": "The source image could not be decoded.",
+          "plannerRequests": 0
+        },
+        "fixture": "http://127.0.0.1:8080/"
+      },
+      "stderr": ""
+    },
+    {
+      "run": 2,
+      "status": "PASS",
+      "durationMs": 11391.585169000002,
+      "exitCode": 0,
+      "evidence": {
+        "status": "PASS",
+        "chromium": "140.0.7339.16",
+        "extensionId": "bdcbehkcmcgbmcoedlcoehakkioldjeg",
+        "manifest": {
+          "version": 3,
+          "csp": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        },
+        "serviceWorkerResponsive": true,
+        "offscreenCreated": true,
+        "captureTrigger": "EXPLICIT_REFRESH",
+        "providers": {
+          "ui": "wasm",
+          "ocr": "wasm",
+          "face": "wasm"
+        },
+        "webgpuAvailable": false,
+        "modelDependentEvidence": {
+          "localPrivacyMs": 4431,
+          "uiDetections": 8,
+          "ocrRegions": 16,
+          "faceRegions": 0
+        },
+        "failClosed": {
+          "code": "The source image could not be decoded.",
+          "plannerRequests": 0
+        },
+        "fixture": "http://127.0.0.1:8080/"
+      },
+      "stderr": ""
+    },
+    {
+      "run": 3,
+      "status": "PASS",
+      "durationMs": 11345.873092999998,
+      "exitCode": 0,
+      "evidence": {
+        "status": "PASS",
+        "chromium": "140.0.7339.16",
+        "extensionId": "bdcbehkcmcgbmcoedlcoehakkioldjeg",
+        "manifest": {
+          "version": 3,
+          "csp": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        },
+        "serviceWorkerResponsive": true,
+        "offscreenCreated": true,
+        "captureTrigger": "EXPLICIT_REFRESH",
+        "providers": {
+          "ui": "wasm",
+          "ocr": "wasm",
+          "face": "wasm"
+        },
+        "webgpuAvailable": false,
+        "modelDependentEvidence": {
+          "localPrivacyMs": 4718.300000011921,
+          "uiDetections": 8,
+          "ocrRegions": 16,
+          "faceRegions": 0
+        },
+        "failClosed": {
+          "code": "The source image could not be decoded.",
+          "plannerRequests": 0
+        },
+        "fixture": "http://127.0.0.1:8080/"
+      },
+      "stderr": ""
+    },
+    {
+      "run": 4,
+      "status": "PASS",
+      "durationMs": 11308.367811000004,
+      "exitCode": 0,
+      "evidence": {
+        "status": "PASS",
+        "chromium": "140.0.7339.16",
+        "extensionId": "bdcbehkcmcgbmcoedlcoehakkioldjeg",
+        "manifest": {
+          "version": 3,
+          "csp": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        },
+        "serviceWorkerResponsive": true,
+        "offscreenCreated": true,
+        "captureTrigger": "EXPLICIT_REFRESH",
+        "providers": {
+          "ui": "wasm",
+          "ocr": "wasm",
+          "face": "wasm"
+        },
+        "webgpuAvailable": false,
+        "modelDependentEvidence": {
+          "localPrivacyMs": 4714,
+          "uiDetections": 8,
+          "ocrRegions": 16,
+          "faceRegions": 0
+        },
+        "failClosed": {
+          "code": "The source image could not be decoded.",
+          "plannerRequests": 0
+        },
+        "fixture": "http://127.0.0.1:8080/"
+      },
+      "stderr": ""
+    },
+    {
+      "run": 5,
+      "status": "PASS",
+      "durationMs": 11674.894420000004,
+      "exitCode": 0,
+      "evidence": {
+        "status": "PASS",
+        "chromium": "140.0.7339.16",
+        "extensionId": "bdcbehkcmcgbmcoedlcoehakkioldjeg",
+        "manifest": {
+          "version": 3,
+          "csp": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        },
+        "serviceWorkerResponsive": true,
+        "offscreenCreated": true,
+        "captureTrigger": "EXPLICIT_REFRESH",
+        "providers": {
+          "ui": "wasm",
+          "ocr": "wasm",
+          "face": "wasm"
+        },
+        "webgpuAvailable": false,
+        "modelDependentEvidence": {
+          "localPrivacyMs": 4914.199999988079,
+          "uiDetections": 8,
+          "ocrRegions": 16,
+          "faceRegions": 0
+        },
+        "failClosed": {
+          "code": "The source image could not be decoded.",
+          "plannerRequests": 0
+        },
+        "fixture": "http://127.0.0.1:8080/"
+      },
+      "stderr": ""
+    }
+  ]
+}

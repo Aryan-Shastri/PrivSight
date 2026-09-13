@@ -1,0 +1,18 @@
+{
+  "id": "aryanshastri/privsight-six-class-local-ui-detector-export",
+  "title": "PrivSight six-class local UI detector export",
+  "code_file": "train_export.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_internet": false,
+  "dataset_sources": [
+    "aryanshastri/privsight-ui-six-class",
+    "aryanshastri/privsight-yolox-apache-text",
+    "aryanshastri/privsight-yolox-offline-deps",
+    "aryanshastri/privsight-ui6-trained-checkpoint"
+  ],
+  "competition_sources": [],
+  "kernel_sources": []
+}

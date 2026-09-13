@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  controlled-demo:
+    name: Controlled demo (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [20, 22]
+    defaults:
+      run:
+        working-directory: demo-sites/registration
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Behavior tests
+        run: node --test test/*.test.mjs
+      - name: Start localhost fixture
+        run: node server.mjs > /tmp/privsight-demo.log 2>&1 & echo $! > /tmp/privsight-demo.pid
+      - name: HTTP smoke check
+        run: |
+          for attempt in {1..20}; do
+            curl --fail --silent http://127.0.0.1:4173/ | grep --quiet "SYNTHETIC DATA ONLY" && exit 0
+            sleep 0.25
+          done
+          cat /tmp/privsight-demo.log
+          exit 1
+      - name: Stop fixture
+        if: always()
+        run: kill "$(cat /tmp/privsight-demo.pid)" 2>/dev/null || true
+
+  repository-checks:
+    name: Repository checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.16.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Validate lockfile policy
+        run: test -f pnpm-lock.yaml || { echo 'pnpm-lock.yaml is required before dependency installation'; exit 1; }
+      - name: Install locked JavaScript dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Test, typecheck, and build extension when present
+        run: |
+          if test -f apps/extension/package.json; then
+            pnpm --filter extension test
+            pnpm --filter extension typecheck
+            pnpm --filter extension build
+          else
+            echo 'Extension package absent; not claiming extension verification.'
+          fi
+      - name: Run synthetic benchmark and five-run demo gate
+        run: |
+          pnpm benchmark
+          pnpm demo:gate
+      - name: Security regression and release audits
+        run: |
+          pnpm security:test
+          pnpm security:check
+          pnpm release:prepare
+          pnpm security:check
+      - name: Upload machine-readable evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: privsight-evaluation-reports
+          path: artifacts/*.json
+          if-no-files-found: error
+      - name: Test Python server when present
+        run: |
+          if test -f apps/server/pyproject.toml; then
+            curl -LsSf https://astral.sh/uv/install.sh | sh
+            "$HOME/.local/bin/uv" sync --project apps/server --frozen
+            (cd apps/server && "$HOME/.local/bin/uv" run pytest)
+            apps/server/.venv/bin/python -m pytest model-training/ui-detector/tests
+          else
+            echo 'Server project absent; not claiming server verification.'
+          fi

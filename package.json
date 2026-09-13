@@ -1,0 +1,27 @@
+{
+  "name": "privsight",
+  "private": true,
+  "packageManager": "pnpm@10.16.1",
+  "scripts": {
+    "install:all": "pnpm install --frozen-lockfile && uv sync --project apps/server",
+    "test": "pnpm --filter extension test",
+    "typecheck": "pnpm --filter extension typecheck",
+    "build": "pnpm --filter extension build",
+    "test:server": "cd apps/server && uv run pytest",
+    "test:all": "pnpm test && pnpm typecheck && pnpm build && cd apps/server && uv run pytest && cd ../.. && apps/server/.venv/bin/python -m pytest model-training/ui-detector/tests",
+    "benchmark": "pnpm --filter extension exec vitest run tests/evaluation-harness.test.ts",
+    "benchmark:planner": "python3 deploy/qwen-vllm/benchmark.py",
+    "demo:gate": "node scripts/demo-gate.mjs",
+    "verify": "pnpm test:all && pnpm benchmark && pnpm demo:gate && pnpm smoke:gate",
+    "demo": "cd apps/server && .venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8080",
+    "smoke:extension": "node scripts/extension-smoke.mjs",
+    "smoke:gate": "node scripts/browser-smoke-gate.mjs",
+    "release:prepare": "python3 scripts/release.py prepare",
+    "release:check": "python3 scripts/release.py check",
+    "security:check": "python3 scripts/security_checks.py all",
+    "security:test": "python3 -m unittest discover -s scripts -p 'test_*.py'"
+  },
+  "devDependencies": {
+    "playwright": "1.55.0"
+  }
+}

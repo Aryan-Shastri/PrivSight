@@ -1,0 +1,1 @@
+{"schema_version":"1.0.0","items":[{"item_id":"self-ltr-001","regions":[{"class":"face","bbox":[0,0,10,10]},{"class":"ui","bbox":[20,0,10,10]}]},{"item_id":"self-rtl-001","regions":[{"class":"text","bbox":[0,0,30,10]},{"class":"sensitive","bbox":[0,20,10,10],"sensitive_type":"email"}]}]}

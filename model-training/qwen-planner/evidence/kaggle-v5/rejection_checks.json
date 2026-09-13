@@ -1,0 +1,12 @@
+[
+  {
+    "check": "invalid_observation_id",
+    "error": "elementId is not present in the current observation",
+    "rejected": true
+  },
+  {
+    "check": "plaintext_secret",
+    "error": "plaintext text is forbidden for a sensitive element; use TYPE_TOKEN",
+    "rejected": true
+  }
+]

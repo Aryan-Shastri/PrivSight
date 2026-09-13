@@ -1,0 +1,10 @@
+path: /kaggle/input/privsight-ui-six-class
+train: images/train
+val: images/val
+names:
+  0: button
+  1: checkbox
+  2: text_input
+  3: dropdown
+  4: icon
+  5: text_region

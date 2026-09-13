@@ -1,0 +1,1 @@
+import type{AgentAction}from"../actions/schemas";export class MockPlannerClient{readonly label="MOCK PLANNER";async next(elements:Array<{id:string;role:string}>):Promise<AgentAction>{const actionable=elements.find(e=>["button","link"].includes(e.role));return actionable?{type:"CLICK",elementId:actionable.id}:{type:"DONE",summary:"No actionable elements remain"}}}
