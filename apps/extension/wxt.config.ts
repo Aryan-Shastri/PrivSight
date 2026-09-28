@@ -5,11 +5,11 @@ export default defineConfig({
   manifest: {
     name: "PrivSight",
     description: "Privacy-before-network browser agent",
-    version: "0.1.3",
+    version: "0.1.4",
     minimum_chrome_version: "116",
     permissions: ["activeTab", "tabs", "scripting", "storage", "sidePanel", "offscreen"],
     host_permissions: ["https://aryan-shastri--privsight-qwen3-vl-api.modal.run/*"],
-    optional_host_permissions: ["http://*/*", "https://*/*"],
+    optional_host_permissions: ["<all_urls>"],
     side_panel: { default_path: "sidepanel.html" },
     action: { default_title: "Open PrivSight" },
     // wasm-unsafe-eval permits packaged ORT WASM compilation; remote script origins remain forbidden.

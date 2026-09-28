@@ -9,7 +9,7 @@ export default function App(){const[status,setStatus]=useState<Status>({state:"I
    const [tab]=await browser.tabs.query({active:true,currentWindow:true});
    if(!tab?.url){setStatus({state:"ERROR",message:"NO_ACTIVE_TAB"});return}
    const url=new URL(tab.url);if(!["http:","https:"].includes(url.protocol)){setStatus({state:"ERROR",message:"UNSUPPORTED_PAGE"});return}
-   const origin=`${url.origin}/*`;const granted=await browser.permissions.contains({origins:[origin]})||await browser.permissions.request({origins:[origin]});
+   const granted=await browser.permissions.contains({origins:["<all_urls>"]})||await browser.permissions.request({origins:["<all_urls>"]});
    if(!granted){setStatus({state:"ERROR",message:`Permission denied for ${url.origin}`});return}
   }
   const result=await browser.runtime.sendMessage({type,...(type==="START_AGENT"?{goal:DEFAULT_AUTONOMOUS_GOAL}: {})});if(!result?.ok)setStatus({state:"ERROR",message:result?.error||"Request failed"})

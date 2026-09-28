@@ -17,7 +17,8 @@ describe("promptless planning defaults",()=>{
   it("declares dynamically requested page origins and surfaces click failures",()=>{
     const config=readFileSync(resolve(import.meta.dirname,"../wxt.config.ts"),"utf8");
     const source=readFileSync(resolve(import.meta.dirname,"../entrypoints/sidepanel/App.tsx"),"utf8");
-    expect(config).toContain('optional_host_permissions: ["http://*/*", "https://*/*"]');
+    expect(config).toContain('optional_host_permissions: ["<all_urls>"]');
+    expect(source).toContain('origins:["<all_urls>"]');
     expect(source).toContain("catch(error)");
   });
 });
