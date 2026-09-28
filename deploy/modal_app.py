@@ -42,6 +42,7 @@ def api():
 
     sys.path.insert(0, "/root")
     from privsight_app.planner.prompt import SYSTEM_PROMPT
+    from privsight_app.planner.autonomy import normalize_autonomous_action
     from privsight_app.schemas.action import AgentAction
     from privsight_app.schemas.observation import SanitizedObservation
 
@@ -94,7 +95,7 @@ Do not use keys named action, element, id, target, selector, or coordinates. Do 
         text = proc.batch_decode(output[:, inputs.input_ids.shape[1]:], skip_special_tokens=True)[0].strip()
         if text.startswith("```"):
             text = text.removeprefix("```json").removeprefix("```").removesuffix("```").strip()
-        action = action_adapter.validate_json(text)
+        action = normalize_autonomous_action(observation, action_adapter.validate_json(text))
         target = getattr(action, "element_id", None)
         if target is not None and target not in {e.id for e in observation.elements}:
             raise ValueError("invalid target")

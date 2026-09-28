@@ -10,6 +10,13 @@ from app.vlm.client import ModelCapacityError, VLLMPlanner
 from tests.test_agent import PNG, metadata
 
 
+def test_autonomous_prompt_prefers_obvious_safe_progress_and_rejects_javascript_hallucinations():
+    assert "one obvious enabled primary control" in SYSTEM_PROMPT
+    assert "Never claim JavaScript is disabled" in SYSTEM_PROMPT
+    assert "ASK_USER only" in SYSTEM_PROMPT
+    assert "Never invent or guess field values" in SYSTEM_PROMPT
+
+
 @pytest.mark.asyncio
 async def test_vllm_uses_structured_output_and_parses_one_action() -> None:
     async def handler(request: httpx.Request) -> httpx.Response:
