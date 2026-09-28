@@ -5,7 +5,7 @@ export default defineConfig({
   manifest: {
     name: "PrivSight",
     description: "Privacy-before-network browser agent",
-    version: "0.1.5",
+    version: "0.1.6",
     minimum_chrome_version: "116",
     permissions: ["activeTab", "tabs", "scripting", "storage", "sidePanel", "offscreen"],
     host_permissions: ["https://aryan-shastri--privsight-qwen3-vl-api.modal.run/*"],
