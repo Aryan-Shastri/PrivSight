@@ -24,6 +24,15 @@
     "security:test": "python3 -m unittest discover -s scripts -p 'test_*.py'"
   },
   "devDependencies": {
-    "playwright": "1.55.0"
+    "playwright": "1.55.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "adm-zip": "0.6.1",
+      "shell-quote": "1.9.0",
+      "tmp": "0.2.6",
+      "uuid": "11.1.1",
+      "esbuild": "0.28.1"
+    }
   }
 }
