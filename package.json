@@ -24,7 +24,7 @@
     "security:test": "python3 -m unittest discover -s scripts -p 'test_*.py'"
   },
   "devDependencies": {
-    "playwright": "1.55.1"
+    "playwright": "1.63.0"
   },
   "pnpm": {
     "overrides": {
