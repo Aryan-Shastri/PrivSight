@@ -5,10 +5,11 @@ import { chromium } from "playwright";
 
 const root = new URL("../", import.meta.url).pathname;
 const extensionPath = `${root}apps/extension/.output/chrome-mv3`;
-const fixtureUrl = "http://127.0.0.1:8080/";
+const fixturePort = "4173";
+const fixtureUrl = `http://127.0.0.1:${fixturePort}/`;
 const evidence = { requests: [], consoleErrors: [] };
 const server = spawn(process.execPath, ["server.mjs"], {
-  cwd: `${root}demo-sites/registration`, env: { ...process.env, PORT: "8080" }, stdio: ["ignore", "pipe", "pipe"],
+  cwd: `${root}demo-sites/registration`, env: { ...process.env, PORT: fixturePort }, stdio: ["ignore", "pipe", "pipe"],
 });
 
 async function waitForFixture() {

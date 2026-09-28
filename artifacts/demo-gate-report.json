@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "scope": "CONTROLLED_SYNTHETIC_DEMO",
-  "generatedAt": "2026-09-13T09:10:36.486Z",
+  "generatedAt": "2026-09-14T14:35:28.326Z",
   "metadata": {
     "environment": {
       "os": "linux",
@@ -10,7 +10,7 @@
       "ci": false
     },
     "build": {
-      "gitCommit": null,
+      "gitCommit": "300d55968c8aa0eeeb786e4a8e99e736037b9eed",
       "dirty": true
     },
     "models": {
@@ -67,41 +67,41 @@
     {
       "run": 1,
       "status": "PASS",
-      "durationMs": 164.702857,
+      "durationMs": 118.553436,
       "exitCode": 0,
-      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.786656ms)\n✔ hostile destructive action is blocked while bounded form actions pass (1.308411ms)\n✔ submission requires explicit confirmation (0.249122ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.253443ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 111.034903",
+      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.744095ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.434924ms)\n✔ submission requires explicit confirmation (0.244683ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.175522ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 73.31228",
       "stderr": ""
     },
     {
       "run": 2,
       "status": "PASS",
-      "durationMs": 190.687408,
+      "durationMs": 122.312589,
       "exitCode": 0,
-      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.961377ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.347723ms)\n✔ submission requires explicit confirmation (0.250843ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.181322ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 135.441398",
+      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.726735ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.536045ms)\n✔ submission requires explicit confirmation (0.243882ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.235362ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 75.386898",
       "stderr": ""
     },
     {
       "run": 3,
       "status": "PASS",
-      "durationMs": 186.216247,
+      "durationMs": 116.080295,
       "exitCode": 0,
-      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.977657ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.560165ms)\n✔ submission requires explicit confirmation (0.303883ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.184202ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 124.626503",
+      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.704055ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.403444ms)\n✔ submission requires explicit confirmation (0.245962ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.177882ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 72.422913",
       "stderr": ""
     },
     {
       "run": 4,
       "status": "PASS",
-      "durationMs": 182.412974,
+      "durationMs": 123.285797,
       "exitCode": 0,
-      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.772135ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.412324ms)\n✔ submission requires explicit confirmation (0.301682ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.188481ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 94.715799",
+      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.694575ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.746927ms)\n✔ submission requires explicit confirmation (0.252282ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.178001ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 76.68739",
       "stderr": ""
     },
     {
       "run": 5,
       "status": "PASS",
-      "durationMs": 147.776147,
+      "durationMs": 120.19329,
       "exitCode": 0,
-      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (2.454902ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.371204ms)\n✔ submission requires explicit confirmation (0.247443ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.175682ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 86.885208",
+      "stdout": "✔ sanitized observation replaces synthetic PII and omits passwords (1.722375ms)\n✔ hostile destructive action is blocked while bounded form actions pass (0.418604ms)\n✔ submission requires explicit confirmation (0.246162ms)\n✔ canvas checkpoint requires the matching synthetic gesture (0.174441ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 74.886694",
       "stderr": ""
     }
   ]

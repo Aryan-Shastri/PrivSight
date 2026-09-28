@@ -69,10 +69,13 @@ jobs:
           else
             echo 'Extension package absent; not claiming extension verification.'
           fi
-      - name: Run synthetic benchmark and five-run demo gate
+      - name: Install Chromium for the real MV3 gate
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run synthetic benchmark, demo gate, and real MV3 gate
         run: |
           pnpm benchmark
           pnpm demo:gate
+          pnpm smoke:gate
       - name: Security regression and release audits
         run: |
           pnpm security:test

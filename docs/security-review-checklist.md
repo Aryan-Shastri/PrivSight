@@ -19,6 +19,18 @@ Complete this checklist for every release candidate. Record exceptions in the re
 - [ ] Malformed, oversized, content-type-spoofed, and replayed requests have negative tests.
 - [ ] MV3 service-worker session recovery rejects corrupt persisted state and restores pending approval safely.
 
+### Local action-control audit
+
+- [x] CLICK, TYPE, SELECT, CHECK, and UNCHECK are role-bound and fail closed; SELECT also requires an option captured in the current observation.
+- [x] Submit, purchase, delete, and account/security changes require exact-flow confirmation; CVV/CARD token actions are classified high risk and payment execution is rejected per P0.
+- [x] The validator's confirmation decision is passed to the injected runtime; the runtime requires that classification and independently rejects live DOM role/option mismatches.
+- [x] Direct payment-token execution without confirmed high-risk classification is rejected.
+- [x] `TYPE_TOKEN` plaintext resolves only in the MV3 background for the exact live session, tab, origin, expiry, and compatible field role; CARD/CVV execution is rejected.
+
+### TYPE_TOKEN MV3 threat boundary
+
+The planner and network payload see only a token alias. Vault plaintext remains in `storage.session` and is resolved in the background immediately before execution. MV3 then requires a single ephemeral background-to-isolated-content message containing the value, exact element ID, origin, and field role. The content runtime rechecks origin, element, and field role before dispatching input/change events. That message is not persisted or logged. The trusted boundary therefore includes the extension background, Chrome extension messaging, and the isolated content script; a compromised extension context or browser remains out of scope. Payment token execution (CARD/CVV) is unsupported and fails closed.
+
 ## Artifact and delivery
 
 - [ ] Full JS, Python, model, browser-smoke, controlled-demo, and security suites pass.

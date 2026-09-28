@@ -15,6 +15,7 @@ SECRET_PATTERNS = [
 ]
 TEXT_SUFFIXES = {".py", ".js", ".mjs", ".ts", ".tsx", ".json", ".yaml", ".yml", ".toml", ".md", ".html", ".css", ".txt", ".lock"}
 ALLOWED_LARGE = {".onnx"}
+ALLOWED_LARGE_PATHS = {Path("apps/extension/public/wasm/ort-wasm-simd-threaded.wasm")}
 
 
 def tracked_files(root: Path = ROOT) -> list[Path]:
@@ -108,8 +109,9 @@ def audit_provenance() -> list[str]:
 def audit_large_files(paths: list[Path]) -> list[str]:
     errors=[]
     for path in paths:
-        if path.is_file() and path.stat().st_size > 5_000_000 and path.suffix.lower() not in ALLOWED_LARGE:
-            errors.append(f"unintended large file ({path.stat().st_size} bytes): {path.relative_to(ROOT)}")
+        relative = path.relative_to(ROOT)
+        if path.is_file() and path.stat().st_size > 5_000_000 and path.suffix.lower() not in ALLOWED_LARGE and relative not in ALLOWED_LARGE_PATHS:
+            errors.append(f"unintended large file ({path.stat().st_size} bytes): {relative}")
         if path.is_file() and path.suffix.lower() in ALLOWED_LARGE and path.stat().st_size > 15_000_000:
             errors.append(f"model exceeds release size policy: {path.relative_to(ROOT)}")
     return errors

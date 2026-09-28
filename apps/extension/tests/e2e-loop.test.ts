@@ -25,7 +25,7 @@ describe("extension → planner loop",()=>{
       expect((form.get("image") as File).type).toBe("image/png");
       return new Response(JSON.stringify({planner:"MOCK PLANNER",action:{type:"CLICK",elementId:"E001"}}),{status:200,headers:{"content-type":"application/json"}});
     });
-    const metadata={schemaVersion:"1.0" as const,sessionId:"s",stepId:0,observationVersion:"v9",goal:"g",page:{origin:"http://localhost:1",title:"t"},elements:[],redaction:{count:0,sanitizedImageSha256:"0".repeat(64)}};
+    const metadata={schemaVersion:"1.0" as const,sessionId:"s",stepId:0,observationVersion:"v9",goal:"g",page:{origin:"http://localhost:1",title:"t"},elements:[],redaction:{count:0,bySensitivity:{},sanitizedImageSha256:"0".repeat(64)}};
     const result=await sendApprovedAgentStep({metadata,image:{kind:"SANITIZED_CAPTURE",bytes:new Uint8Array([137,80,78,71]),sha256:"0".repeat(64)}},fetcher);
     expect(result).toEqual({planner:"MOCK PLANNER",action:{type:"CLICK",elementId:"E001"}});
   });
@@ -44,5 +44,19 @@ describe("local safe executor",()=>{
     expect(await executeAction({type:"CLICK",elementId:"E002"},{document,resolveToken:async()=>""})).toEqual({status:"APPROVAL_REQUIRED",action:{type:"CLICK",elementId:"E002"}});
     expect(clicks).toBe(0);
     expect(await executeAction({type:"CLICK",elementId:"E002"},{document,approvedAction:{type:"CLICK",elementId:"E002"},resolveToken:async()=>""})).toEqual({status:"EXECUTED"});expect(clicks).toBe(1);
+  });
+  it("fails closed when action and DOM role disagree",async()=>{
+    document.body.innerHTML='<div data-privsight-id="E001"></div><input data-privsight-id="E002"><select data-privsight-id="E003"><option>A</option></select>';
+    const run=(action:Parameters<typeof executeAction>[0])=>executeAction(action,{document,resolveToken:async()=>"secret"});
+    await expect(run({type:"CLICK",elementId:"E001"})).rejects.toThrow("ROLE_MISMATCH");
+    await expect(run({type:"TYPE_TEXT",elementId:"E001",text:"x"})).rejects.toThrow("ROLE_MISMATCH");
+    await expect(run({type:"SELECT",elementId:"E002",option:"A"})).rejects.toThrow("ROLE_MISMATCH");
+    await expect(run({type:"SELECT",elementId:"E003",option:"B"})).rejects.toThrow("INVALID_OPTION");
+    await expect(run({type:"CHECK",elementId:"E002"})).rejects.toThrow("ROLE_MISMATCH");
+  });
+  it("uses the validator confirmation decision instead of reclassifying it",async()=>{
+    document.body.innerHTML='<button data-privsight-id="E001">Continue</button>';
+    const action={type:"CLICK",elementId:"E001"} as const;
+    expect(await executeAction(action,{document,requiresConfirmation:true,resolveToken:async()=>""})).toEqual({status:"APPROVAL_REQUIRED",action});
   });
 });

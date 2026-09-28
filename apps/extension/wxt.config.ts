@@ -7,7 +7,7 @@ export default defineConfig({
     description: "Privacy-before-network browser agent",
     version: "0.1.0",
     minimum_chrome_version: "116",
-    permissions: ["activeTab", "scripting", "storage", "sidePanel", "offscreen"],
+    permissions: ["activeTab", "tabs", "scripting", "storage", "sidePanel", "offscreen"],
     host_permissions: ["http://127.0.0.1:8080/*"],
     side_panel: { default_path: "sidepanel.html" },
     action: { default_title: "Open PrivSight" },

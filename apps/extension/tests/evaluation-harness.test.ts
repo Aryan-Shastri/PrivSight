@@ -19,7 +19,9 @@ const fixturePath=resolve(import.meta.dirname,"../evaluation/corpus.json");
 const sha=(data:string|Uint8Array)=>createHash("sha256").update(data).digest("hex");
 const pct=(xs:number[],p:number)=>{const s=[...xs].sort((a,b)=>a-b);return s[Math.min(s.length-1,Math.ceil(p*s.length)-1)]??0};
 const timed=<T>(name:string,fn:()=>T):T=>{const a=performance.now();const v=fn();(samples[name]??=[]).push(performance.now()-a);return v};
-const baseObservation=():SanitizedObservation=>({schemaVersion:"1.0",sessionId:"fixture",stepId:1,observationVersion:"v1",goal:"Use aliases only",page:{origin:"https://fixture.test",title:"Fixture"},elements:[],redaction:{count:0,sanitizedImageSha256:"fixture-sha"}});
+const timedAsync=async<T>(name:string,fn:()=>Promise<T>):Promise<T>=>{const a=performance.now();const v=await fn();(samples[name]??=[]).push(performance.now()-a);return v};
+const emptyImageSha="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+const baseObservation=():SanitizedObservation=>({schemaVersion:"1.0",sessionId:"fixture",stepId:1,observationVersion:"v1",goal:"Use aliases only",page:{origin:"https://fixture.test",title:"Fixture"},elements:[],redaction:{count:0,bySensitivity:{},sanitizedImageSha256:emptyImageSha}});
 
 describe("fixed synthetic evaluation corpus",()=>{
  it("detects structured PII with measured recall and precision",()=>{
@@ -32,9 +34,9 @@ describe("fixed synthetic evaluation corpus",()=>{
   metrics.structured_pii_precision={status:precision>=.9?"PASS":"FAIL",requiredEvidence:true,value:precision,unit:"ratio",threshold:">=0.90",details:{tp,fp,fn,corpusSize:corpus.pii.length}};
   expect(recall).toBeGreaterThanOrEqual(.98);expect(precision).toBeGreaterThanOrEqual(.9);
  });
- it("blocks synthetic plaintext leakage",()=>{
+ it("blocks synthetic plaintext leakage",async()=>{
   let leaked=0;
-  for(const value of corpus.leakage){const o=baseObservation();o.goal=value;const result=timed("egressFirewall",()=>approveForEgress(o,{kind:"SANITIZED_CAPTURE",bytes:new Uint8Array(),sha256:"fixture-sha"}));if(result.ok)leaked++;}
+  for(const value of corpus.leakage){const o=baseObservation();o.goal=value;const result=await timedAsync("egressFirewall",()=>approveForEgress(o,{kind:"SANITIZED_CAPTURE",bytes:new Uint8Array(),sha256:emptyImageSha}));if(result.ok)leaked++;}
   metrics.critical_plaintext_egress={status:leaked===0?"PASS":"FAIL",requiredEvidence:true,value:leaked,unit:"accepted_payloads",threshold:"=0",details:{corpusSize:corpus.leakage.length}};
   expect(leaked).toBe(0);
  });
@@ -62,6 +64,7 @@ describe("fixed synthetic evaluation corpus",()=>{
 });
 
 afterAll(()=>{
+ if(process.env.UPDATE_EVALUATION_ARTIFACT!=="1")return;
  const root=resolve(import.meta.dirname,"../../..");
  const modelFile=(name:string,expected:string)=>{const path=resolve(root,"apps/extension/public/models",name);if(!existsSync(path))return {status:"ABSENT",sha256:null};const actual=sha(readFileSync(path));return {status:actual===expected?"PACKAGED_HASH_VERIFIED":"HASH_MISMATCH",sha256:actual};};
  const model={uiDetector:modelFile("privsight-ui6.onnx","0cbc2a4f006db44860572932b8f66edfb3c30c104a46fbfc1193ba4d07e42ee9"),ocr:modelFile("text_detection_en_ppocrv3_2023may.onnx","03f550c6b406fda8bf54bd8327815f6c7e2edd98cea02348c93d879254366587"),faceDetector:modelFile("version-RFB-320.onnx","34cd7e60aeff28744c657de7a3dc64e872d506741de66987f3426f2b79f88017"),planner:{mode:"MOCK_DEFAULT_WITH_SEPARATE_QWEN_BATCH_EVIDENCE",model:"qwen-lm/qwen-3-vl/transformers/2b-instruct/1",deployment:"NOT_PERSISTENT",evidence:"model-training/qwen-planner/evidence/kaggle-v5/summary.json"}};

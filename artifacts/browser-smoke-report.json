@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "scope": "FIVE_CONSECUTIVE_REAL_CHROMIUM_MV3_RUNS",
-  "generatedAt": "2026-09-13T09:11:42.211Z",
+  "generatedAt": "2026-09-14T14:36:25.916Z",
   "models": {
     "ui": {
       "sha256": "0cbc2a4f006db44860572932b8f66edfb3c30c104a46fbfc1193ba4d07e42ee9"
@@ -21,15 +21,15 @@
   "latency": {
     "metric": "local privacy request round trip",
     "sampleCount": 5,
-    "p50Ms": 4718.300000011921,
-    "p95Ms": 5171.699999988079,
-    "worstMs": 5171.699999988079
+    "p50Ms": 4770.300000011921,
+    "p95Ms": 5097.299999982119,
+    "worstMs": 5097.299999982119
   },
   "runs": [
     {
       "run": 1,
       "status": "PASS",
-      "durationMs": 19455.539066999998,
+      "durationMs": 11222.458459,
       "exitCode": 0,
       "evidence": {
         "status": "PASS",
@@ -49,7 +49,7 @@
         },
         "webgpuAvailable": false,
         "modelDependentEvidence": {
-          "localPrivacyMs": 5171.699999988079,
+          "localPrivacyMs": 4540,
           "uiDetections": 8,
           "ocrRegions": 16,
           "faceRegions": 0
@@ -58,14 +58,14 @@
           "code": "The source image could not be decoded.",
           "plannerRequests": 0
         },
-        "fixture": "http://127.0.0.1:8080/"
+        "fixture": "http://127.0.0.1:4173/"
       },
       "stderr": ""
     },
     {
       "run": 2,
       "status": "PASS",
-      "durationMs": 11391.585169000002,
+      "durationMs": 11298.627923999999,
       "exitCode": 0,
       "evidence": {
         "status": "PASS",
@@ -85,7 +85,7 @@
         },
         "webgpuAvailable": false,
         "modelDependentEvidence": {
-          "localPrivacyMs": 4431,
+          "localPrivacyMs": 4649.699999988079,
           "uiDetections": 8,
           "ocrRegions": 16,
           "faceRegions": 0
@@ -94,14 +94,14 @@
           "code": "The source image could not be decoded.",
           "plannerRequests": 0
         },
-        "fixture": "http://127.0.0.1:8080/"
+        "fixture": "http://127.0.0.1:4173/"
       },
       "stderr": ""
     },
     {
       "run": 3,
       "status": "PASS",
-      "durationMs": 11345.873092999998,
+      "durationMs": 11395.240889,
       "exitCode": 0,
       "evidence": {
         "status": "PASS",
@@ -121,7 +121,7 @@
         },
         "webgpuAvailable": false,
         "modelDependentEvidence": {
-          "localPrivacyMs": 4718.300000011921,
+          "localPrivacyMs": 4770.300000011921,
           "uiDetections": 8,
           "ocrRegions": 16,
           "faceRegions": 0
@@ -130,14 +130,14 @@
           "code": "The source image could not be decoded.",
           "plannerRequests": 0
         },
-        "fixture": "http://127.0.0.1:8080/"
+        "fixture": "http://127.0.0.1:4173/"
       },
       "stderr": ""
     },
     {
       "run": 4,
       "status": "PASS",
-      "durationMs": 11308.367811000004,
+      "durationMs": 11931.686536000001,
       "exitCode": 0,
       "evidence": {
         "status": "PASS",
@@ -157,7 +157,7 @@
         },
         "webgpuAvailable": false,
         "modelDependentEvidence": {
-          "localPrivacyMs": 4714,
+          "localPrivacyMs": 5097.299999982119,
           "uiDetections": 8,
           "ocrRegions": 16,
           "faceRegions": 0
@@ -166,14 +166,14 @@
           "code": "The source image could not be decoded.",
           "plannerRequests": 0
         },
-        "fixture": "http://127.0.0.1:8080/"
+        "fixture": "http://127.0.0.1:4173/"
       },
       "stderr": ""
     },
     {
       "run": 5,
       "status": "PASS",
-      "durationMs": 11674.894420000004,
+      "durationMs": 11324.975595000004,
       "exitCode": 0,
       "evidence": {
         "status": "PASS",
@@ -193,7 +193,7 @@
         },
         "webgpuAvailable": false,
         "modelDependentEvidence": {
-          "localPrivacyMs": 4914.199999988079,
+          "localPrivacyMs": 4975.399999976158,
           "uiDetections": 8,
           "ocrRegions": 16,
           "faceRegions": 0
@@ -202,7 +202,7 @@
           "code": "The source image could not be decoded.",
           "plannerRequests": 0
         },
-        "fixture": "http://127.0.0.1:8080/"
+        "fixture": "http://127.0.0.1:4173/"
       },
       "stderr": ""
     }

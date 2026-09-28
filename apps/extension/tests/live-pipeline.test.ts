@@ -12,7 +12,7 @@ function deps(overrides: Partial<LivePipelineDeps> = {}): LivePipelineDeps {
     capture: async () => capture,
     localVision: async () => ({ detections: [{ className: "icon", confidence: .9, bbox: { x: 1, y: 1, width: 1, height: 1 } }], ocrRegions: [], faceRegions: [] }),
     redact: async (_capture, _regions) => { events.push("redact"); return { kind: "SANITIZED_CAPTURE", bytes: sanitized, sha256: "a".repeat(64) }; },
-    approve: (_metadata, image) => { events.push("approve"); expect(image.bytes).toEqual(sanitized); return { ok: true as const, value: { metadata: _metadata, image } }; },
+    approve: async (_metadata, image) => { events.push("approve"); expect(image.bytes).toEqual(sanitized); return { ok: true as const, value: { metadata: _metadata, image } }; },
     network: async (payload: ApprovedPayload) => { events.push("network"); expect(payload.image.bytes).toEqual(sanitized); expect(payload.image.bytes).not.toEqual(raw); return { planner: "MOCK PLANNER (TEST DOUBLE)", action: { type: "DONE", summary: "ok" } }; },
     events,
     ...overrides,

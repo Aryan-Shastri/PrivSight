@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.1",
   "scope": "SYNTHETIC_FIXTURES_WITH_PACKAGED_MODEL_DISCOVERY",
-  "generatedAt": "2026-09-13T09:10:34.918Z",
+  "generatedAt": "2026-09-14T14:35:12.829Z",
   "metadata": {
     "environment": {
       "os": "linux",
@@ -12,7 +12,7 @@
     "build": {
       "package": "extension",
       "version": "0.1.0",
-      "gitCommit": null,
+      "gitCommit": "300d55968c8aa0eeeb786e4a8e99e736037b9eed",
       "dirty": true
     },
     "models": {
@@ -128,27 +128,27 @@
   "latency": {
     "structuredPii": {
       "sampleCount": 10,
-      "p50Ms": 0.010080000000016298,
-      "p95Ms": 0.5948459999999614,
-      "worstMs": 0.5948459999999614
+      "p50Ms": 0.01251999999999498,
+      "p95Ms": 0.5126449999999636,
+      "worstMs": 0.5126449999999636
     },
     "egressFirewall": {
       "sampleCount": 4,
-      "p50Ms": 0.043800000000032924,
-      "p95Ms": 0.6265659999999116,
-      "worstMs": 0.6265659999999116
+      "p50Ms": 0.05364100000002736,
+      "p95Ms": 0.9972490000000107,
+      "worstMs": 0.9972490000000107
     },
     "redaction": {
       "sampleCount": 3,
-      "p50Ms": 0.010119999999915308,
-      "p95Ms": 0.1408410000000231,
-      "worstMs": 0.1408410000000231
+      "p50Ms": 0.009920000000022355,
+      "p95Ms": 0.1444410000000289,
+      "worstMs": 0.1444410000000289
     },
     "actionSchema": {
       "sampleCount": 8,
-      "p50Ms": 0.19284200000004148,
-      "p95Ms": 2.7103439999999637,
-      "worstMs": 2.7103439999999637
+      "p50Ms": 0.11088100000000622,
+      "p95Ms": 2.3481800000000135,
+      "worstMs": 2.3481800000000135
     }
   }
 }

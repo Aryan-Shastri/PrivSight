@@ -13,14 +13,14 @@
       "bytes": 3784
     },
     {
-      "path": "apps/extension/.output/chrome-mv3/assets/vision.worker-D6Vei8xQ.js",
-      "sha256": "b4eca445f39bd9694af34ecc27028b737821ddc6a772da5f752b9438c9ee327c",
-      "bytes": 795665
+      "path": "apps/extension/.output/chrome-mv3/assets/vision.worker-AmOpzSH4.js",
+      "sha256": "440e853f3800f72d4372abb32070c5f261efbe1e19a9a9bc1e6d2b937f79b872",
+      "bytes": 797446
     },
     {
       "path": "apps/extension/.output/chrome-mv3/background.js",
-      "sha256": "5b1f06fdd181bb08eaad9799a5fb7d95ce86ab1fc74e4ecb754a22fb1031b4b0",
-      "bytes": 106829
+      "sha256": "5bca3e503283dc810f5c5631da08edd35576a00aa84bb94f05c64d1830813850",
+      "bytes": 121557
     },
     {
       "path": "apps/extension/.output/chrome-mv3/chunks/browser-DKnVyUgM.js",
@@ -28,24 +28,24 @@
       "bytes": 760
     },
     {
-      "path": "apps/extension/.output/chrome-mv3/chunks/offscreen-Beh8PD2J.js",
-      "sha256": "d5559367f3a45dbc298881668c897e69e97e1ea37ca8761a257c48eee9cb0a1f",
-      "bytes": 2373
+      "path": "apps/extension/.output/chrome-mv3/chunks/offscreen-nojEVwgo.js",
+      "sha256": "bb3af3a64fbdd0f0285f8451ee9931315f5998ec5d5cb89bad2955ebb024cb80",
+      "bytes": 6051
     },
     {
-      "path": "apps/extension/.output/chrome-mv3/chunks/sidepanel-BllqeCtf.js",
-      "sha256": "7f2135d3b6cf3d9bda195c2f7f86e0d9cccbbd47b87123a2bdce0a1065dbf558",
-      "bytes": 222388
+      "path": "apps/extension/.output/chrome-mv3/chunks/sidepanel-6uQ2kryh.js",
+      "sha256": "71a6a555286d99eff3348c44221829b8f33f3ba00e843f8f7cbbbb47176b75da",
+      "bytes": 222827
     },
     {
       "path": "apps/extension/.output/chrome-mv3/content-runtime.js",
-      "sha256": "45ff77c27d31c6f405ceb4b74befaa16eeef82a0501b801b2bb2cdbc4c81b6cd",
-      "bytes": 2596
+      "sha256": "7709d756c97abf8088a553e0386442171a46f8c67577eac61fea494183be794a",
+      "bytes": 7518
     },
     {
       "path": "apps/extension/.output/chrome-mv3/manifest.json",
-      "sha256": "091143692c7b2ae36558654da44a669e42e7d188caba54082d9fe949f12b9356",
-      "bytes": 507
+      "sha256": "077a3c865accf6d6b152f06ee63bd13caa04560d4d45494810aa793519cb9270",
+      "bytes": 514
     },
     {
       "path": "apps/extension/.output/chrome-mv3/models/README.md",
@@ -74,13 +74,23 @@
     },
     {
       "path": "apps/extension/.output/chrome-mv3/offscreen.html",
-      "sha256": "a96286d3f5a92afbedf6e7a71c94595648b3329402dc0eae3547ec6533f0844d",
+      "sha256": "25a5cfe4550a7748dcf298c74503f00853e810dd2fe93e80797a900478c1b6fc",
       "bytes": 235
     },
     {
       "path": "apps/extension/.output/chrome-mv3/sidepanel.html",
-      "sha256": "50f7acab273350ba64aa905c15488f3fca985e463c1206c413bb5ecabfb383ea",
+      "sha256": "3659bcaf75a2e7767abf6be3636536ba0451b4a69076fc4ee983fb51bd79ba80",
       "bytes": 432
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/wasm/ort-wasm-simd-threaded.mjs",
+      "sha256": "30dd851d9c00622940500f71ddd2ff8820c5cb65270816080175b958705385a8",
+      "bytes": 20856
+    },
+    {
+      "path": "apps/extension/.output/chrome-mv3/wasm/ort-wasm-simd-threaded.wasm",
+      "sha256": "71aef04959c5c1b6de461b6538e2058e306610034a85aad2742d0c7fd4533fe4",
+      "bytes": 11210254
     },
     {
       "path": "apps/extension/public/models/README.md",
@@ -108,19 +118,24 @@
       "bytes": 1270727
     },
     {
+      "path": "artifacts/browser-banking-acceptance.json",
+      "sha256": "b1b2d4588bd43f7376ac64ce8d6fbf1540467140356dee1ede4ab430382a92ed",
+      "bytes": 3236
+    },
+    {
       "path": "artifacts/browser-smoke-report.json",
-      "sha256": "e8e618216fe98b628cc21cde58af706f356b1a88d888c332775da0b14007c628",
-      "bytes": 5843
+      "sha256": "b4b39f513fe1d637b0e645d4155d2d306c129dc0d5c9d2892a414b7ffb6f1103",
+      "bytes": 5844
     },
     {
       "path": "artifacts/demo-gate-report.json",
-      "sha256": "725aa412e07e454d99b594246cfe20d63485f364bcf75d17a3c8d8d8d301be0e",
-      "bytes": 4762
+      "sha256": "9a8248d47e6dcfb75eccf7e8a596d74b1ac583f081a5b53b8c3e5091ccce4a6b",
+      "bytes": 4794
     },
     {
       "path": "artifacts/evaluation-report.json",
-      "sha256": "f88246f0e76d63264b32ced1c610d179821b9413996cc4fcfb2c68d03e5f8db6",
-      "bytes": 3946
+      "sha256": "f182a76f25fc4b3b180a44da00b878d555267ce7be76a2a5ec3a9a3f0901589e",
+      "bytes": 3982
     },
     {
       "path": "artifacts/sbom-models.spdx.json",
@@ -131,6 +146,11 @@
       "path": "artifacts/sbom-software.spdx.json",
       "sha256": "e36f2a04f50f03b15428166b9842a66a6a6330b892b0d6aa723f85f12a402aab",
       "bytes": 230762
+    },
+    {
+      "path": "artifacts/wasm-vision-benchmark.json",
+      "sha256": "4960a8e7ba234d3bf7b815b5cbc5d8dc6b7b59054e09f9d4fb69e1b75ff339f0",
+      "bytes": 11435
     },
     {
       "path": "docs/THIRD_PARTY_LICENSES.md",

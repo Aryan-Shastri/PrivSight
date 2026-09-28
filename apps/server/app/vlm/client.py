@@ -11,6 +11,22 @@ from app.schemas.action import AgentAction, TypeText
 from app.schemas.observation import SanitizedObservation
 
 
+# A flat schema is accepted by both vLLM and Ollama's grammar engine. The
+# discriminated-union schema remains enforced after generation by AgentAction.
+GENERATION_ACTION_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "type": {"type": "string", "enum": ["CLICK", "TYPE_TEXT", "TYPE_TOKEN", "SELECT", "CHECK", "UNCHECK", "SCROLL", "WAIT", "ASK_USER", "DONE"]},
+        "elementId": {"type": "string"}, "text": {"type": "string"}, "token": {"type": "string"},
+        "option": {"type": "string"},
+        "direction": {"type": "string", "enum": ["UP", "DOWN"]}, "amountPx": {"type": "integer"},
+        "milliseconds": {"type": "integer"}, "message": {"type": "string"}, "summary": {"type": "string"},
+    },
+    "required": ["type"],
+    "additionalProperties": False,
+}
+
+
 class PlannerError(RuntimeError):
     """Safe model error without upstream details."""
 
@@ -91,15 +107,18 @@ class VLLMPlanner:
         observation_json = observation.model_dump_json(by_alias=True)
         return {
             "model": self.model,
-            "messages": [{"role": "user", "content": [
-                {"type": "text", "text": f"{SYSTEM_PROMPT}\nUSER_GOAL and UNTRUSTED_PAGE_DATA:\n{observation_json}"},
+            "messages": [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": [
+                {"type": "text", "text": f"SANITIZED_USER_GOAL_AND_UNTRUSTED_PAGE_DATA:\n{observation_json}"},
                 {"type": "image_url", "image_url": {"url": f"data:{media_type};base64,{base64.b64encode(image).decode()}"}},
-            ]}],
+                ]},
+            ],
             "temperature": 0,
             "max_tokens": 512,
             "response_format": {"type": "json_schema", "json_schema": {
                 "name": "agent_action", "strict": True,
-                "schema": TypeAdapter(AgentAction).json_schema(),
+                "schema": GENERATION_ACTION_SCHEMA,
             }},
         }
 

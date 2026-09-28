@@ -54,6 +54,13 @@ async def security_boundary(request: Request, call_next):
     return response
 
 
+@app.get("/")
+def root() -> dict[str, str]:
+    settings = get_settings()
+    planner = "MOCK PLANNER" if settings.planner_mode == "MOCK" else "QWEN_VLLM"
+    return {"service": "PrivSight API", "status": "ok", "planner": planner, "health": "/health"}
+
+
 @app.get("/health")
 def health() -> dict[str, str]:
     return {"status": "ok"}

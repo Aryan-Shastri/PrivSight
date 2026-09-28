@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "1.0",
+  "scope": "CONTROLLED_REAL_CHROMIUM_MV3_BANKING_ACCEPTANCE",
+  "generatedAt": "2026-09-14T14:35:27.157Z",
+  "chromium": "140.0.7339.16",
+  "extensionId": "jbhklpbdicempnaoegklepgddmoaienh",
+  "controlledOverrides": {
+    "hostPermissions": [
+      "<all_urls>"
+    ],
+    "plannerEndpoint": "http://127.0.0.1:8081/api/v1/agent/step",
+    "reason": "Headless Chromium cannot grant activeTab through a browser-toolbar gesture; isolated port avoids any developer server on the production port",
+    "productionBuildSourcesUnchanged": true
+  },
+  "summary": {
+    "passed": 2,
+    "total": 2,
+    "status": "PASS",
+    "successRate": 1
+  },
+  "tasks": [
+    {
+      "id": "banking-multistep-confirmation",
+      "status": "PASS",
+      "planner": "DETERMINISTIC SYNTHETIC ACCEPTANCE PLANNER",
+      "confirmed": true,
+      "steps": 4
+    },
+    {
+      "id": "cross-origin-fail-closed",
+      "status": "PASS",
+      "planner": "DETERMINISTIC SYNTHETIC ACCEPTANCE PLANNER",
+      "error": "Could not establish connection. Receiving end does not exist.",
+      "plannerRequestsAfterOriginChange": 0
+    }
+  ],
+  "network": [
+    {
+      "task": "success",
+      "method": "POST",
+      "url": "http://127.0.0.1:8081/api/v1/agent/step",
+      "schemaVersion": "1.0",
+      "stepId": 0,
+      "imageSha256": "2beb71569f91d41b611319f6e9ee2c92498cebaa8dc22fd21bf36e9daa86fe8b",
+      "imageBytes": 24876,
+      "forbiddenValuesAbsent": true,
+      "action": {
+        "type": "TYPE_TEXT",
+        "elementId": "E001",
+        "text": "25.00"
+      }
+    },
+    {
+      "task": "success",
+      "method": "POST",
+      "url": "http://127.0.0.1:8081/api/v1/agent/step",
+      "schemaVersion": "1.0",
+      "stepId": 1,
+      "imageSha256": "0d2a370f83ba41d98c7b1f1c98128f5a0b7a053264e19446743f87c4b83ea0ad",
+      "imageBytes": 24893,
+      "forbiddenValuesAbsent": true,
+      "action": {
+        "type": "SELECT",
+        "elementId": "E002",
+        "option": "checking"
+      }
+    },
+    {
+      "task": "success",
+      "method": "POST",
+      "url": "http://127.0.0.1:8081/api/v1/agent/step",
+      "schemaVersion": "1.0",
+      "stepId": 2,
+      "imageSha256": "35a98ce4207d13c7efe3249c24ab155fd1d41002bf8df7d2f218e252066be0c2",
+      "imageBytes": 24898,
+      "forbiddenValuesAbsent": true,
+      "action": {
+        "type": "CLICK",
+        "elementId": "E004"
+      }
+    },
+    {
+      "task": "success",
+      "method": "POST",
+      "url": "http://127.0.0.1:8081/api/v1/agent/step",
+      "schemaVersion": "1.0",
+      "stepId": 3,
+      "imageSha256": "b1c0da63aa1cb670a333ff95b19baca5cd0a53dc2c401b54f5a57f437813d4dc",
+      "imageBytes": 27702,
+      "forbiddenValuesAbsent": true,
+      "action": {
+        "type": "DONE",
+        "summary": "Synthetic transfer completed"
+      }
+    },
+    {
+      "task": "cross-origin",
+      "method": "POST",
+      "url": "http://127.0.0.1:8081/api/v1/agent/step",
+      "schemaVersion": "1.0",
+      "stepId": 0,
+      "imageSha256": "d78c1fd2a1762d7464c82f65ed2fe1f33dfe83fd8329e8946dbeaa0999e53c97",
+      "imageBytes": 27075,
+      "forbiddenValuesAbsent": true,
+      "action": {
+        "type": "CLICK",
+        "elementId": "E001"
+      }
+    }
+  ]
+}

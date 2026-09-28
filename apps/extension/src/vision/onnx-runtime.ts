@@ -13,13 +13,30 @@ function assertPackagedPath(path: string): void {
 export async function createLocalVisionSession(
   packagedModelPath: string | Uint8Array,
   factory: SessionFactory = ort.InferenceSession as unknown as SessionFactory,
+  webGpuAvailable: boolean = typeof navigator !== "undefined" && "gpu" in navigator,
 ): Promise<{ provider: VisionProvider; session: Awaited<ReturnType<SessionFactory["create"]>> }> {
   if (typeof packagedModelPath === "string") assertPackagedPath(packagedModelPath);
   const failures: string[] = [];
-  for (const provider of ["webgpu", "wasm"] as const) {
+  for (const provider of (webGpuAvailable ? ["webgpu", "wasm"] : ["wasm"]) as VisionProvider[]) {
     try {
       const session = await factory.create(packagedModelPath, { executionProviders: [provider] });
-      return { provider, session };
+      if (provider === "wasm") return { provider, session };
+      const result: { provider: VisionProvider; session: { run(feeds: unknown): Promise<unknown> } } = {
+        provider,
+        session: { run: async feeds => {
+          try { return await session.run(feeds); }
+          catch (gpuError) {
+            try {
+              const wasm = await factory.create(packagedModelPath, { executionProviders: ["wasm"] });
+              result.provider = "wasm"; result.session = wasm;
+              return await wasm.run(feeds);
+            } catch (wasmError) {
+              throw new Error(`LOCAL_INFERENCE_UNAVAILABLE:webgpu:${gpuError instanceof Error ? gpuError.message : "unknown"};wasm:${wasmError instanceof Error ? wasmError.message : "unknown"}`);
+            }
+          }
+        } },
+      };
+      return result;
     } catch (error) {
       failures.push(`${provider}:${error instanceof Error ? error.message : "unknown"}`);
     }

@@ -5,14 +5,14 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]; ART=ROOT/"artifacts"; REL=ROOT/"release"
 ARCHIVE=REL/"privsight-0.1.0-rc1.zip"; MANIFEST=ART/"sha256-manifest.json"
-FORBIDDEN_PARTS={".git","node_modules",".venv","venv","__pycache__",".pytest_cache",".cache","generated",".kaggle-input","coverage"}
+FORBIDDEN_PARTS={".git",".hermes","node_modules",".venv","venv","__pycache__",".pytest_cache",".cache","generated",".kaggle-input","coverage"}
 FORBIDDEN_NAMES={"kaggle.json",".env",".env.local",".env.production",".npmrc",".pypirc","credentials","credentials.json","id_rsa","id_ed25519"}
 HASH_ROOTS=[ROOT/"apps/extension/public/models",ROOT/"apps/extension/.output/chrome-mv3",ART]
 
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 def excluded(p):
  rel=p.relative_to(ROOT)
- return bool(set(rel.parts)&FORBIDDEN_PARTS or p.name in FORBIDDEN_NAMES or rel.parts[:1]==("release",) or p==MANIFEST or p.suffix in {".pyc"})
+ return bool(set(rel.parts)&FORBIDDEN_PARTS or p.name in FORBIDDEN_NAMES or rel.parts[:1]==("release",) or rel.parts[:3] in {("model-training","privacy-models","output"),("model-training","ui-detector","kaggle-output")} or p==MANIFEST or p.suffix in {".pyc"})
 def files(): return sorted((p for p in ROOT.rglob("*") if p.is_file() and not excluded(p)),key=lambda p:p.relative_to(ROOT).as_posix())
 def package_records():
  lock=(ROOT/"pnpm-lock.yaml").read_text()
