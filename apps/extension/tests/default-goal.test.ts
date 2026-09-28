@@ -14,4 +14,10 @@ describe("promptless planning defaults",()=>{
     expect(source).not.toContain("<textarea");
     expect(source).toContain("goal:DEFAULT_AUTONOMOUS_GOAL");
   });
+  it("declares dynamically requested page origins and surfaces click failures",()=>{
+    const config=readFileSync(resolve(import.meta.dirname,"../wxt.config.ts"),"utf8");
+    const source=readFileSync(resolve(import.meta.dirname,"../entrypoints/sidepanel/App.tsx"),"utf8");
+    expect(config).toContain('optional_host_permissions: ["http://*/*", "https://*/*"]');
+    expect(source).toContain("catch(error)");
+  });
 });

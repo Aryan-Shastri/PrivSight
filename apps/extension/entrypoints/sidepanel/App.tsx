@@ -4,6 +4,7 @@ type Status={state:string;message:string;planner?:string};
 export default function App(){const[status,setStatus]=useState<Status>({state:"IDLE",message:"Ready. Sensitive fields are sanitized locally before planning."});
  useEffect(()=>{const listener=(m:any)=>{if(m?.type==="AGENT_STATUS")setStatus(m.payload)};browser.runtime.onMessage.addListener(listener);return()=>browser.runtime.onMessage.removeListener(listener)},[]);
  const send=async(type:string)=>{
+  try{
   if(type==="START_AGENT"){
    const [tab]=await browser.tabs.query({active:true,currentWindow:true});
    if(!tab?.url){setStatus({state:"ERROR",message:"NO_ACTIVE_TAB"});return}
@@ -12,6 +13,7 @@ export default function App(){const[status,setStatus]=useState<Status>({state:"I
    if(!granted){setStatus({state:"ERROR",message:`Permission denied for ${url.origin}`});return}
   }
   const result=await browser.runtime.sendMessage({type,...(type==="START_AGENT"?{goal:DEFAULT_AUTONOMOUS_GOAL}: {})});if(!result?.ok)setStatus({state:"ERROR",message:result?.error||"Request failed"})
+  }catch(error){setStatus({state:"ERROR",message:error instanceof Error?error.message:String(error)})}
  };
  const active=!['IDLE','COMPLETE','ERROR'].includes(status.state);
  return <main><header><div className="mark" aria-hidden="true">P</div><div><h1>PrivSight</h1><p className="eyebrow">LOCAL PRIVACY LAYER</p></div><span className="status"><i/>Protected</span></header>

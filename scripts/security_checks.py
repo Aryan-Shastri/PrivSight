@@ -79,7 +79,8 @@ def audit_network_csp() -> list[str]:
     runtime = [p for p in tracked_files() if p.suffix in {".ts", ".tsx", ".js", ".mjs", ".html"} and ("apps" in p.parts and ("extension" in p.parts or "server" in p.parts) and "tests" not in p.parts)]
     for path in runtime:
         for match in url.findall(path.read_text(errors="ignore")):
-            if not (match.startswith("http://127.0.0.1:8080") or match.startswith("https://example.test") or match.startswith("https://aryan-shastri--privsight-qwen3-vl-api.modal.run")):
+            optional_page_origin = path == ROOT / "apps/extension/wxt.config.ts" and match in {"http://*/*", "https://*/*"}
+            if not (optional_page_origin or match.startswith("http://127.0.0.1:8080") or match.startswith("https://example.test") or match.startswith("https://aryan-shastri--privsight-qwen3-vl-api.modal.run")):
                 errors.append(f"unapproved runtime URL in {path.relative_to(ROOT)}: {match}")
     return errors
 
