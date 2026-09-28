@@ -14,6 +14,15 @@ const execute=(message:unknown)=>new Promise<unknown>(resolve=>listener(message,
 const scan=()=>execute({type:"SCAN_DOM",observationVersion:"v1"});
 
 describe("injected action runtime",()=>{
+  it("classifies and activates input submit controls as buttons",async()=>{
+    document.body.innerHTML='<form><input type="submit" value="Continue"></form>';
+    let submitted=false;document.querySelector("form")!.addEventListener("submit",event=>{event.preventDefault();submitted=true});
+    const observed=await scan() as {elements:Array<{role:string;label?:string}>};
+    expect(observed.elements[0]?.role).toBe("submit");
+    expect(observed.elements[0]?.label).toBe("Continue");
+    expect(await execute({type:"EXECUTE_ACTION",action:{type:"CLICK",elementId:"E001"},requiresConfirmation:false,observationVersion:"v1"})).toEqual({ok:true,result:{status:"EXECUTED"}});
+    expect(submitted).toBe(true);
+  });
   it("rejects actions whose live DOM role is incompatible",async()=>{
     document.body.innerHTML='<div tabindex="0"></div>';await scan();
     expect(await execute({type:"EXECUTE_ACTION",action:{type:"CLICK",elementId:"E001"},requiresConfirmation:false,observationVersion:"v1"})).toEqual({ok:false,error:"ROLE_MISMATCH"});
