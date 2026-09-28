@@ -28,3 +28,14 @@ def test_does_not_guess_when_multiple_primary_controls_exist():
     obs = SanitizedObservation.model_validate(value)
     action = AskUser(type="ASK_USER", message="Enable JavaScript?")
     assert normalize_autonomous_action(obs, action) == action
+
+
+def test_prefers_unique_submit_for_a_filled_form_over_an_incidental_button():
+    value=metadata(elements=[
+        {"id":"E001","role":"textbox","label":"Email","value":"[EMAIL_1]","enabled":True,"visible":True,"source":"DOM"},
+        {"id":"E002","role":"button","label":"Clear","enabled":True,"visible":True,"source":"DOM"},
+        {"id":"E003","role":"submit","label":"Continue","enabled":True,"visible":True,"source":"DOM"},
+    ])
+    obs=SanitizedObservation.model_validate(value)
+    action=Click(type="CLICK",elementId="E002")
+    assert normalize_autonomous_action(obs,action)==Click(type="CLICK",elementId="E003")
