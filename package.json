@@ -24,6 +24,6 @@
     "security:test": "python3 -m unittest discover -s scripts -p 'test_*.py'"
   },
   "devDependencies": {
-    "playwright": "1.55.0"
+    "playwright": "1.55.1"
   }
 }
