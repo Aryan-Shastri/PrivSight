@@ -39,3 +39,14 @@ def test_prefers_unique_submit_for_a_filled_form_over_an_incidental_button():
     obs=SanitizedObservation.model_validate(value)
     action=Click(type="CLICK",elementId="E002")
     assert normalize_autonomous_action(obs,action)==Click(type="CLICK",elementId="E003")
+
+
+def test_requests_local_entry_when_required_sensitive_field_is_empty():
+    value=metadata(elements=[
+        {"id":"E001","role":"textbox","label":"Password","enabled":True,"visible":True,"source":"DOM"},
+        {"id":"E002","role":"submit","label":"Sign in","enabled":True,"visible":True,"source":"DOM"},
+    ])
+    obs=SanitizedObservation.model_validate(value)
+    result=normalize_autonomous_action(obs,Click(type="CLICK",elementId="E002"))
+    assert isinstance(result,AskUser)
+    assert result.message=="Enter the required password locally, then continue."

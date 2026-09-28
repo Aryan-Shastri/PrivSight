@@ -15,7 +15,7 @@ export default function App(){const[status,setStatus]=useState<Status>({state:"I
   const result=await browser.runtime.sendMessage({type,...(type==="START_AGENT"?{goal:DEFAULT_AUTONOMOUS_GOAL}: {})});if(!result?.ok)setStatus({state:"ERROR",message:result?.error||"Request failed"})
   }catch(error){setStatus({state:"ERROR",message:error instanceof Error?error.message:String(error)})}
  };
- const active=!['IDLE','COMPLETE','ERROR'].includes(status.state);
+ const active=!['IDLE','COMPLETE','ERROR','ASK_USER'].includes(status.state);
  return <main><header><div className="mark" aria-hidden="true">P</div><div><h1>PrivSight</h1><p className="eyebrow">LOCAL PRIVACY LAYER</p></div><span className="status"><i/>Protected</span></header>
  <section className="hero"><p className="kicker">DOM-first, private by construction</p><h2>Navigate the web.<br/><em>Keep your data yours.</em></h2><p>Controls are scanned and sensitive values tokenized locally. Only schema-checked metadata crosses the boundary.</p></section>
  <section className="card"><label>Sanitize the current page locally, then ask the private model for the safest next action.</label><div className="compose"><span>No prompt or field value is sent raw.</span><button disabled={active} onClick={()=>send("START_AGENT")}>Sanitize and continue <b>→</b></button></div></section>

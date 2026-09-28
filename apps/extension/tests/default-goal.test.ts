@@ -20,5 +20,6 @@ describe("promptless planning defaults",()=>{
     expect(config).toContain('optional_host_permissions: ["<all_urls>"]');
     expect(source).toContain('origins:["<all_urls>"]');
     expect(source).toContain("catch(error)");
+    expect(source).toContain("'ERROR','ASK_USER'");
   });
 });
