@@ -11,6 +11,7 @@ import { RuntimeLifecycle, assertAuthorizedOrigin, tokenizeObservation, type Run
 import {CaptureController,withDeadline} from "../src/protocol/reliability";
 import {revalidateVisualClick} from "../src/actions/visual-target";
 import {REMOTE_PLANNER_TIMEOUT_MS} from "../src/agent/default-goal";
+import {rebindFreshDomTarget} from "../src/actions/dom-target";
 
 interface RuntimeObservation extends AgentObservation { scanned: any; capture: RawCapture }
 type Session=PersistedSession;
@@ -68,7 +69,11 @@ async function start(goal:string){
   plan:async payload=>{notify({state:"PLANNING",message:"Sanitized JSON and redacted pixels sent. Modal cold start may take up to three minutes."});const planned=await withDeadline(sendApprovedAgentStep(payload as any),REMOTE_PLANNER_TIMEOUT_MS,"PLANNER_TIMEOUT");(prepared as any).planner=planned.planner;return planned.action},
   validate:async(action,raw)=>{if(!lifecycle.isCurrent(run))throw Error("STALE_RUN");const o=raw as RuntimeObservation;const evidence=prepared?.evidence??o.scanned.elements;const result=validateAction(action,{observationVersion:o.version,actionObservationVersion:o.version,elements:new Map(evidence.map((e:any)=>[e.id,{enabled:e.enabled,visible:e.visible,role:e.role,label:e.label,options:e.options,source:e.source}])),tokens:await tokenVault.issuedTokens(sessionId)});requiresConfirmation=result.ok&&result.requiresConfirmation;return result},
   confirm:async action=>{if(!lifecycle.isCurrent(run)||!current)return false;current.pending=action;await saveSession(browser.storage.session,current);notify({state:"AWAITING_APPROVAL",planner:prepared?.planner,message:"Final submit requires explicit approval."});return new Promise<boolean>(resolve=>{approvalResolver=resolve})},
-  execute:async action=>{if(!lifecycle.isCurrent(run))throw Error("STALE_RUN");if(typeof tab.id!=="number")throw Error("NO_ACTIVE_TAB");const tabId=tab.id;let executed;if("elementId" in action&&action.elementId.startsWith("V")){
+  execute:async action=>{if(!lifecycle.isCurrent(run))throw Error("STALE_RUN");if(typeof tab.id!=="number")throw Error("NO_ACTIVE_TAB");const tabId=tab.id;let executed;let executionAction=action;let executionVersion=prepared?.metadata?.observationVersion as string|undefined;
+  if(requiresConfirmation&&action.type==="CLICK"&&action.elementId.startsWith("E")){
+   if(!currentObservation)throw Error("STALE_OBSERVATION");const previous=currentObservation.scanned.elements.find((e:any)=>e.id===action.elementId);if(!previous)throw Error("STALE_ELEMENT");const fresh=await observe(tab,run);const reboundId=rebindFreshDomTarget(previous,fresh.scanned.elements);executionAction={...action,elementId:reboundId};executionVersion=fresh.version;currentObservation=fresh;
+  }
+  if("elementId" in action&&action.elementId.startsWith("V")){
    const evidence=prepared?.evidence?.find((e:any)=>e.id===action.elementId);if(!evidence)throw Error("INVALID_VISUAL_TARGET");if(!currentObservation)throw Error("STALE_OBSERVATION");
    const freshObservation=await observe(tab,run);const freshResponse=await runLocalVision(freshObservation);let freshImage:SanitizedImage|undefined;const freshPrepared=await prepareLivePrivacyPipeline({sessionId,stepId:stepId++,observationVersion:freshObservation.version,goal,origin:freshObservation.scanned.origin,title:freshObservation.scanned.title,dom:freshObservation.scanned.elements},{capture:async()=>freshObservation.capture,localVision:async()=>freshResponse.vision,redact:async()=>freshImage??={...freshResponse.image,bytes:Uint8Array.from(freshResponse.image.bytes)}});const freshTarget=freshPrepared.evidence.find((e:any)=>e.id===action.elementId);if(!freshTarget)throw Error("STALE_VISUAL_COORDINATES");
    const bind=(o:RuntimeObservation,target:any)=>({version:o.version,capturedAt:o.capture.capturedAt,scrollX:o.capture.scrollX,scrollY:o.capture.scrollY,viewportWidthCss:o.capture.viewportWidthCss,viewportHeightCss:o.capture.viewportHeightCss,devicePixelRatio:o.capture.devicePixelRatio,target});
@@ -83,7 +88,7 @@ async function start(goal:string){
    // MV3 requires one transient exact-action message to the isolated content world.
    // Plaintext is not persisted, logged, included in status, or sent to the planner.
    executed=await tabMessage(tab.id!,{type:"EXECUTE_TOKEN_VALUE",elementId:action.elementId,origin:target.origin,fieldRole:target.fieldRole,value,approved:true,requiresConfirmation,observationVersion});
-  }else executed=await tabMessage(tabId,{type:"EXECUTE_ACTION",action,approved:true,requiresConfirmation,observationVersion:prepared?.metadata?.observationVersion});return executed?.ok?{ok:true}:{ok:false,code:executed?.error||"EXECUTION_FAILED"}},
+  }else executed=await tabMessage(tabId,{type:"EXECUTE_ACTION",action:executionAction,approved:true,requiresConfirmation,observationVersion:executionVersion});return executed?.ok?{ok:true}:{ok:false,code:executed?.error||"EXECUTION_FAILED"}},
   verify:async({action,after})=>({ok:expectedChange(action,after as RuntimeObservation),code:"EXPECTED_STATE_CHANGE_NOT_PROVEN"}),
  },{signal:controller.signal});finish(result,prepared?.planner);
  }finally{approvalResolver=undefined;controller=undefined;if(lifecycle.isCurrent(run)){await lifecycle.terminate(run);if(activeRun===run){activeRun=undefined;current=undefined}}}
